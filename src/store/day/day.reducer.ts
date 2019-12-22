@@ -1,6 +1,7 @@
 import { DayState, DayActionTypes, EDIT_DAY_TITLE, EDIT_DAY_DESCRIPTION, EDIT_DAY_EXERCISE_ITEM, ADD_DAY_EXERCISE_ITEM, DELETE_DAY_EXERCISE_ITEM } from './day.types';
+import { dayStateSeedData } from './day.seed-data';
 
-const initialState: DayState = [];
+const initialState = dayStateSeedData;
 
 export function dayReducer(days = initialState, action: DayActionTypes): DayState {
 	switch (action.type) {
@@ -32,8 +33,8 @@ export function dayReducer(days = initialState, action: DayActionTypes): DayStat
 					return { ...day, exercises: day.exercises.map(exr => (exr.id === action.payload.id ? action.payload : exr)) };
 				}
 				return day;
-      });
-      
+			});
+
 		default:
 			return days;
 	}

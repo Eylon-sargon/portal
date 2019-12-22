@@ -1,12 +1,20 @@
 import React from 'react';
-import Header from './components/layout/Header';
-import DaysPage from './pages/all-days.page';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import configureStore from './store';
+import Routes from './Routes';
+import MainLayout from './components/layout/MainLayout';
+const store = configureStore();
+
 const App: React.FC = () => {
 	return (
-		<div className="App">
-			<Header />
-			<DaysPage />
-		</div>
+		<Provider store={store}>
+			<BrowserRouter>
+				<MainLayout>
+					<Routes />
+				</MainLayout>
+			</BrowserRouter>
+		</Provider>
 	);
 };
 

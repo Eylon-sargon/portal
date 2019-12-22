@@ -1,4 +1,3 @@
-import uuid from 'uuid';
 import { EDIT_DAY_TITLE, EDIT_DAY_DESCRIPTION, EDIT_DAY_EXERCISE_ITEM, ADD_DAY_EXERCISE_ITEM, DELETE_DAY_EXERCISE_ITEM } from './day.types';
 import { Day } from '../../types/Day';
 import { UniqueId, ExerciseItem, ExerciseItemDto } from './../../types/ExerciseItem';

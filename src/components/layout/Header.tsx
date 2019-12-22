@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,7 +10,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
-			flexGrow: 1,
 			marginBottom: 30,
 		},
 		menuButton: {
@@ -23,7 +23,8 @@ const Header = () => {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static">
+			<CssBaseline />
+			<AppBar position="relative">
 				<Toolbar variant="dense">
 					<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
 						<MenuIcon />
