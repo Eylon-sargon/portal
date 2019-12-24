@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { withRouter, RouteComponentProps, Router } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,6 +20,8 @@ import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import TodayIcon from '@material-ui/icons/Today';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import FlightIcon from '@material-ui/icons/Flight';
+import IdeaIcon from '@material-ui/icons/LineWeightRounded';
 
 const drawerWidth = 240;
 
@@ -161,6 +163,24 @@ const MainLayout: React.FC<Props> = ({ children, history }) => {
 							<QuestionAnswerIcon />
 						</ListItemIcon>
 						<ListItemText primary="NLP Moudule" />
+					</ListItem>
+				</List>
+				<Divider />
+				<List>
+					<ListItem button onClick={() => redirect('idea-module')}>
+						<ListItemIcon>
+							<IdeaIcon />
+						</ListItemIcon>
+						<ListItemText primary="Ideas" />
+					</ListItem>
+				</List>
+				<Divider />
+				<List>
+					<ListItem button onClick={() => redirect('travel-module')}>
+						<ListItemIcon>
+							<FlightIcon />
+						</ListItemIcon>
+						<ListItemText primary="Travels" />
 					</ListItem>
 				</List>
 			</Drawer>

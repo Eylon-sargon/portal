@@ -6,11 +6,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import { red } from '@material-ui/core/colors';
-import ExpansionPannel from './ExerciseItemExpansionPanel';
+import ExerciseItemExpansionPanel from './ExerciseItemExpansionPanel';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import { Day } from '../../types/Day';
 import { Tooltip } from '@material-ui/core';
+import AddExerciseItemDialog from './AddExersiceItemDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -39,26 +40,25 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
 	day: Day;
+	index: number;
 }
 
-const DayCard: React.FC<Props> = ({ day }) => {
+const DayCard: React.FC<Props> = ({ day, index }) => {
 	const classes = useStyles({});
-
+	if (index === 0) {
+		console.log(day);
+	}
 	return (
 		<Card className={classes.card}>
 			<CardHeader
 				avatar={
 					<Avatar aria-label="recipe" className={classes.avatar}>
-						{day.index}
+						{index + 1}
 					</Avatar>
 				}
 				action={
 					<Fragment>
-						<Tooltip title="Add Exercise Item">
-							<IconButton aria-label="settings">
-								<AddIcon />
-							</IconButton>
-						</Tooltip>
+						<AddExerciseItemDialog day={day} />
 						<Tooltip title="Edit">
 							<IconButton aria-label="settings">
 								<EditIcon />
@@ -71,8 +71,8 @@ const DayCard: React.FC<Props> = ({ day }) => {
 			/>
 
 			<CardContent>
-				{day.exercises.map(exerciseItem => (
-					<ExpansionPannel key={exerciseItem.id} exerciseItem={exerciseItem} />
+				{day.exerciseItems.map(exerciseItem => (
+					<ExerciseItemExpansionPanel key={exerciseItem.id} exerciseItem={exerciseItem} />
 				))}
 			</CardContent>
 		</Card>

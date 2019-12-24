@@ -9,6 +9,7 @@ import ExerciseItemTitle from './ExerciseItemTitle';
 import ExerciseItemDetails from './ExerciseItemDetails';
 
 import { ExerciseItem } from '../../types/ExerciseItem';
+import { getExercise } from '../../util/referenceData';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -34,9 +35,10 @@ interface Props {
 	customTitle?: JSX.Element;
 }
 
-const SimpleExpansionPanel: React.FC<Props> = ({ exerciseItem }) => {
+const ExerciseItemExpansionPanel: React.FC<Props> = ({ exerciseItem }) => {
 	const classes = useStyles({});
-	const Icon = exerciseItem.exercise.icon;
+	const exercise = getExercise(exerciseItem.exercise);
+	const Icon = exercise.icon;
 	return (
 		<div className={classes.root}>
 			<ExpansionPanel>
@@ -48,7 +50,7 @@ const SimpleExpansionPanel: React.FC<Props> = ({ exerciseItem }) => {
 							</Grid>
 						)}
 						<Grid item className={classes.title}>
-							<ExerciseItemTitle exerciseItem={exerciseItem} />
+							<ExerciseItemTitle exercise={exercise} exerciseItem={exerciseItem} />
 						</Grid>
 					</Grid>
 				</ExpansionPanelSummary>
@@ -60,4 +62,4 @@ const SimpleExpansionPanel: React.FC<Props> = ({ exerciseItem }) => {
 	);
 };
 
-export default SimpleExpansionPanel;
+export default ExerciseItemExpansionPanel;

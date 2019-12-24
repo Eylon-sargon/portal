@@ -6,6 +6,8 @@ import InfoIcon from '@material-ui/icons/Info';
 import React from 'react';
 import { ExerciseItem } from '../../types/ExerciseItem';
 import IconWithText from '../common/IconWithText';
+import { getExercise, getExerciseItemSets } from '../../util/referenceData';
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
@@ -30,14 +32,16 @@ interface Props {
 
 const ExerciseItemDetails: React.FC<Props> = ({ exerciseItem }) => {
 	const classes = useStyles({});
-
+	const exercise = getExercise(exerciseItem.exercise);
+	const sets = getExerciseItemSets(exerciseItem);
+	console.log(sets);
 	return (
 		<div className={classes.root}>
-			<IconWithText icon={<FormatListBulletedIcon />} text={<Typography className={classes.heading}>{exerciseItem.sets.join(' | ')}</Typography>} />
+			<IconWithText icon={<FormatListBulletedIcon />} text={<Typography className={classes.heading}>{sets.join(' | ')}</Typography>} />
 
 			<IconWithText icon={<WatchLaterIcon />} text={<Typography className={classes.heading}> {exerciseItem.rest} seconds</Typography>} />
 
-			<IconWithText icon={<InfoIcon />} text={<Typography className={classes.heading}>{exerciseItem.exercise.description}</Typography>} />
+			<IconWithText icon={<InfoIcon />} text={<Typography className={classes.heading}>{exercise.description}</Typography>} />
 		</div>
 	);
 };

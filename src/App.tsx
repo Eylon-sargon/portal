@@ -4,7 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store';
 import Routes from './Routes';
 import MainLayout from './components/layout/MainLayout';
-const store = configureStore();
+
+export const store = configureStore();
 
 const App: React.FC = () => {
 	return (

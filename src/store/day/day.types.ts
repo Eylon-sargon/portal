@@ -12,31 +12,31 @@ export type DayState = Day[];
 interface EditDayTitleAction {
 	type: typeof EDIT_DAY_TITLE;
 	payload: string;
-	index: number;
+	id: UniqueId;
 }
 
 interface EditDayDescriptionAction {
 	type: typeof EDIT_DAY_DESCRIPTION;
 	payload: string;
-	index: number;
+	id: UniqueId;
 }
 
 interface AddExercieItemAction {
 	type: typeof ADD_DAY_EXERCISE_ITEM;
 	payload: ExerciseItem;
-	index: number;
+	id: UniqueId;
 }
 
 interface DeleteExercieItemAction {
 	type: typeof DELETE_DAY_EXERCISE_ITEM;
 	payload: UniqueId;
-	index: number;
+	id: UniqueId;
 }
 
 interface EditExercieItemAction {
 	type: typeof EDIT_DAY_EXERCISE_ITEM;
 	payload: ExerciseItem;
-	index: number;
+	id: UniqueId;
 }
 
 export type DayActionTypes = EditDayTitleAction | EditDayDescriptionAction | AddExercieItemAction | DeleteExercieItemAction | EditExercieItemAction;

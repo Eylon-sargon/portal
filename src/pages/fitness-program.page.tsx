@@ -1,18 +1,27 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import { dayStateSeedData } from '../store/day/day.seed-data';
 import DayCard from '../components/fitness-module/DayCard';
+import { connect } from 'react-redux';
+import { AppState } from '../store';
+import { DayState } from '../store/day/day.types';
 
-const FitnessProgramPage = () => {
+interface Props {
+	days: DayState;
+}
+const FitnessProgramPage: React.FC<Props> = ({ days }) => {
 	return (
 		<Grid container>
-			{dayStateSeedData.map(day => (
-				<Grid item xs={12} md={4} key={day.index}>
-					<DayCard day={day} />
+			{days.map((day, index) => (
+				<Grid item xs={12} md={4} key={day.id}>
+					<DayCard day={day} index={index} />
 				</Grid>
 			))}
 		</Grid>
 	);
 };
 
-export default FitnessProgramPage;
+const mapStateToProps = (state: AppState) => ({
+	days: state.day,
+});
+
+export default connect(mapStateToProps)(FitnessProgramPage);

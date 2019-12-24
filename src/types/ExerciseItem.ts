@@ -1,14 +1,11 @@
-import { Exercise } from './Exercice';
-
 export interface ExerciseItem {
 	id: UniqueId;
-	index: number;
 	sets: Set[];
 	rest: number;
-	exercise: Exercise;
+	exercise: UniqueId;
 }
 
-export type ExerciseItemDto = Omit<ExerciseItem, 'id' | 'index'>;
+export type ExerciseItemDto = Omit<ExerciseItem, 'id'>;
 
 export type Set = string;
 export type UniqueId = string;

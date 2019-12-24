@@ -1,8 +1,9 @@
-import { ExerciseItem } from './ExerciseItem';
+import { ExerciseItem, UniqueId } from './ExerciseItem';
 
 export interface Day {
-	index: number;
+	id: UniqueId;
 	title: string;
 	desctiption?: string;
-	exercises: ExerciseItem[];
+	isRest?: boolean;
+	exerciseItems: ExerciseItem[];
 }

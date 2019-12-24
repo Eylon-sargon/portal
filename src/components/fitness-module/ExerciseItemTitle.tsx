@@ -4,6 +4,8 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { ExerciseItem } from '../../types/ExerciseItem';
+import { Exercise } from '../../types/Exercice';
+import { getExerciseItemSets } from '../../util/referenceData';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -23,19 +25,21 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+	exercise: Exercise;
 	exerciseItem: ExerciseItem;
 }
 
-const ExerciseItemTitle: React.FC<Props> = ({ exerciseItem }) => {
+const ExerciseItemTitle: React.FC<Props> = ({ exerciseItem, exercise }) => {
 	const classes = useStyles({});
+	const sets = getExerciseItemSets(exerciseItem);
 
 	return (
 		<Grid container justify="space-between" className={classes.root}>
 			<Grid item>
-				<Typography className={classes.heading}>{exerciseItem.exercise.title}</Typography>
+				<Typography className={classes.heading}>{exercise.title}</Typography>
 			</Grid>
 			<Grid item>
-				<Chip label={exerciseItem.sets.join(' | ')} color="primary" size="small" />
+				<Chip label={sets.join(' | ')} color="primary" size="small" />
 			</Grid>
 		</Grid>
 	);
