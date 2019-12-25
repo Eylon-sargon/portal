@@ -1,8 +1,4 @@
-import { ExerciseState } from './exercise.types';
-import { Exercise } from '../../types/Exercice';
-import uuid from 'uuid';
-
-const exerciseList = [
+export const rootExercises = [
 	{
 		title: 'Seated shoulder press',
 		description: 'Rotating motion',
@@ -104,5 +100,3 @@ const exerciseList = [
 		image: '',
 	},
 ];
-
-export const exerciseSeedData: ExerciseState = exerciseList.map(exercise => ({ ...exercise, id: uuid() }));

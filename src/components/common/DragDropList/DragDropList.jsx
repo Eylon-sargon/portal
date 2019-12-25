@@ -7,7 +7,17 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme =>
 	createStyles({
-		icon: {},
+		root: {
+			position: 'relative',
+		},
+		icon: {
+			position: 'absolute',
+			top: theme.spacing(2),
+			left: 0,
+		},
+		body: {
+			marginLeft: theme.spacing(3),
+		},
 	}),
 );
 
@@ -54,7 +64,7 @@ const DragDropListComponent = ({ data, onDragChange }) => {
 			<Droppable droppableId="droppable">
 				{(provided, snapshot) => (
 					<RootRef rootRef={provided.innerRef}>
-						<List>
+						<List className={classes.root}>
 							{items.map((item, index) => (
 								<Draggable key={item.id} draggableId={item.id} index={index}>
 									{(provided, snapshot) => (
@@ -65,10 +75,10 @@ const DragDropListComponent = ({ data, onDragChange }) => {
 											{...provided.dragHandleProps}
 											style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
 										>
-											<ListItemIcon className={classes.icon}>
+											{/* <ListItemIcon className={classes.icon}>
 												<DragIndicatorIcon />
-											</ListItemIcon>
-											<ListItemText primary={item.primary} secondary={item.secondary} />
+											</ListItemIcon> */}
+											<ListItemText className={classes.body} primary={item.primary} secondary={item.secondary} />
 											<ListItemSecondaryAction>{item.actions}</ListItemSecondaryAction>
 										</ListItem>
 									)}
