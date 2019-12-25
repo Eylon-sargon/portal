@@ -6,7 +6,7 @@ export const EDIT_DAY_DESCRIPTION = 'EDIT_DAY_DESCRIPTION';
 export const ADD_DAY_EXERCISE_ITEM = 'ADD_DAY_EXERCISE_ITEM';
 export const EDIT_DAY_EXERCISE_ITEM = 'EDIT_DAY_EXERCISE_ITEM';
 export const DELETE_DAY_EXERCISE_ITEM = 'DELETE_DAY_EXERCISE_ITEM';
-
+export const SORT_EXERCISE_ITEMS = 'SORT_EXERCISE_ITEMS';
 export type DayState = Day[];
 
 interface EditDayTitleAction {
@@ -39,4 +39,10 @@ interface EditExercieItemAction {
 	id: UniqueId;
 }
 
-export type DayActionTypes = EditDayTitleAction | EditDayDescriptionAction | AddExercieItemAction | DeleteExercieItemAction | EditExercieItemAction;
+interface SortExerciseItems {
+	type: typeof SORT_EXERCISE_ITEMS;
+	payload: ExerciseItem[]; // Id's of exercise Items
+	id: UniqueId;
+}
+
+export type DayActionTypes = EditDayTitleAction | EditDayDescriptionAction | AddExercieItemAction | DeleteExercieItemAction | EditExercieItemAction | SortExerciseItems;

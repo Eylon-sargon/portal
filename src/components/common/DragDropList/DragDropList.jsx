@@ -14,16 +14,9 @@ const useStyles = makeStyles(theme =>
 const DragDropListComponent = ({ data, onDragChange }) => {
 	const classes = useStyles();
 	const [items, setItems] = useState([]);
-	const [reordered, triggerReordered] = useState(false);
 	useEffect(() => {
 		setItems(data);
 	}, [data]);
-
-	useEffect(() => {
-		if (onDragChange) {
-			onDragChange(items);
-		}
-	}, [items, onDragChange]);
 
 	const reorder = (list, startIndex, endIndex) => {
 		const result = Array.from(list);
@@ -49,7 +42,7 @@ const DragDropListComponent = ({ data, onDragChange }) => {
 		}
 
 		setItems(reorder(items, result.source.index, result.destination.index));
-		triggerReordered(!reordered);
+		onDragChange(reorder(items, result.source.index, result.destination.index));
 	};
 
 	if (!items || !items.length) {

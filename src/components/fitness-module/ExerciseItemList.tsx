@@ -7,6 +7,8 @@ import { colors } from '../../util/theme';
 import { getExercise } from '../../util/referenceData';
 import DragDropList, { DragDropListData } from '../common/DragDropList';
 import { Day } from '../../types/Day';
+import { sortExerciseItems } from '../../store/day/day.actions';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
 	day: Day;
+	sortExerciseItems: typeof sortExerciseItems;
 }
 
 const generateData = (day: Day, classes: any): DragDropListData[] =>
@@ -46,13 +49,16 @@ const generateData = (day: Day, classes: any): DragDropListData[] =>
 		secondary: <ExerciseItemDetails exerciseItem={exerciseItem} />,
 	}));
 
-const ExerciseItemExpansionPanel: React.FC<Props> = ({ day }) => {
+const ExerciseItemExpansionPanel: React.FC<Props> = ({ day, sortExerciseItems }) => {
 	const classes = useStyles({});
 	const data = generateData(day, classes);
 
-	const onDragChange = (items: DragDropListData[]) => console.log(items.map(item => item.id));
+	const onDragChange = (items: DragDropListData[]) => {
+		const exerciseItemIds = items.map(item => item.id);
+		sortExerciseItems(day, exerciseItemIds);
+	};
 
 	return <DragDropList data={data} onDragChange={onDragChange} />;
 };
 
-export default ExerciseItemExpansionPanel;
+export default connect(null, { sortExerciseItems })(ExerciseItemExpansionPanel);

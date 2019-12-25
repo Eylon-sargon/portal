@@ -1,4 +1,5 @@
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
@@ -13,14 +14,13 @@ const useStyles = makeStyles((theme: Theme) =>
 		root: {
 			width: '100%',
 			display: 'block',
+			paddingBottom: theme.spacing(2.5),
+			color: '#000',
 		},
 		heading: {
-			fontSize: theme.typography.pxToRem(15),
 			fontWeight: theme.typography.fontWeightRegular,
 		},
 		subHeading: {
-			fontSize: theme.typography.pxToRem(13),
-			color: '#333',
 			marginLeft: 10,
 		},
 	}),
@@ -34,14 +34,41 @@ const ExerciseItemDetails: React.FC<Props> = ({ exerciseItem }) => {
 	const classes = useStyles({});
 	const exercise = getExercise(exerciseItem.exercise);
 	const sets = getExerciseItemSets(exerciseItem);
-	console.log(sets);
 	return (
 		<div className={classes.root}>
-			<IconWithText icon={<FormatListBulletedIcon />} text={<Typography className={classes.heading}>{sets.join(' | ')}</Typography>} />
+			{sets.length > 0 && (
+				<IconWithText
+					icon={<FormatListBulletedIcon />}
+					text={
+						<Typography variant="subtitle2" className={classes.heading}>
+							{sets.join(' | ')}
+						</Typography>
+					}
+				/>
+			)}
 
-			<IconWithText icon={<WatchLaterIcon />} text={<Typography className={classes.heading}> {exerciseItem.rest} seconds</Typography>} />
+			{!!exerciseItem.rest && (
+				<IconWithText
+					icon={<WatchLaterIcon />}
+					text={
+						<Typography variant="subtitle2" className={classes.heading}>
+							{exerciseItem.rest ? `${exerciseItem.rest} seconds` : '-'}
+						</Typography>
+					}
+				/>
+			)}
+			{!!exercise.description && (
+				<IconWithText
+					icon={<InfoIcon />}
+					text={
+						<Typography variant="subtitle2" className={classes.heading}>
+							{exercise.description ? exercise.description : '-'}
+						</Typography>
+					}
+				/>
+			)}
 
-			<IconWithText icon={<InfoIcon />} text={<Typography className={classes.heading}>{exercise.description}</Typography>} />
+			<Divider />
 		</div>
 	);
 };
