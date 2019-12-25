@@ -5,13 +5,16 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 import { red } from '@material-ui/core/colors';
 import ExerciseItemExpansionPanel from './ExerciseItemExpansionPanel';
-import AddIcon from '@material-ui/icons/Add';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import EditIcon from '@material-ui/icons/Edit';
 import { Day } from '../../types/Day';
 import { Tooltip } from '@material-ui/core';
 import AddExerciseItemDialog from './AddExersiceItemDialog';
+import { editDayDescription, editDayTitle } from '../../store/day/day.actions';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -22,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			height: 0,
 			paddingTop: '56.25%', // 16:9
 		},
+		input: { margin: '5px 0' },
 		expand: {
 			transform: 'rotate(0deg)',
 			marginLeft: 'auto',
@@ -33,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			transform: 'rotate(180deg)',
 		},
 		avatar: {
-			backgroundColor: red[500],
+			backgroundColor: theme.palette.primary.main,
 		},
 	}),
 );
@@ -41,13 +45,17 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
 	day: Day;
 	index: number;
+	editDayTitle: typeof editDayTitle;
+	editDayDescription: typeof editDayDescription;
 }
 
-const DayCard: React.FC<Props> = ({ day, index }) => {
+const DayCard: React.FC<Props> = ({ day, index, editDayTitle, editDayDescription }) => {
 	const classes = useStyles({});
-	if (index === 0) {
-		console.log(day);
-	}
+	const [editMode, setEditMode] = useState(false);
+
+	const handleTitleChange = (e: any) => editDayTitle(day, e.target.value);
+	const handleDescriptionChange = (e: any) => editDayDescription(day, e.target.value);
+
 	return (
 		<Card className={classes.card}>
 			<CardHeader
@@ -57,17 +65,23 @@ const DayCard: React.FC<Props> = ({ day, index }) => {
 					</Avatar>
 				}
 				action={
-					<Fragment>
+					<div style={{ display: 'flex' }}>
 						<AddExerciseItemDialog day={day} />
-						<Tooltip title="Edit">
-							<IconButton aria-label="settings">
-								<EditIcon />
+						<Tooltip title={editMode ? 'Back' : 'Edit'}>
+							<IconButton aria-label="settings" onClick={() => setEditMode(!editMode)}>
+								{editMode ? <ArrowBackIcon /> : <EditIcon />}
 							</IconButton>
 						</Tooltip>
-					</Fragment>
+					</div>
 				}
-				title={day.title}
-				subheader={day.desctiption || null}
+				title={editMode ? <TextField value={day.title} label="Training day tit le" fullWidth onChange={handleTitleChange} className={classes.input} /> : day.title}
+				subheader={
+					editMode ? (
+						<TextField value={day.desctiption} label="Training day description" multiline fullWidth onChange={handleDescriptionChange} className={classes.input} />
+					) : (
+						day.desctiption
+					)
+				}
 			/>
 
 			<CardContent>
@@ -79,4 +93,4 @@ const DayCard: React.FC<Props> = ({ day, index }) => {
 	);
 };
 
-export default DayCard;
+export default connect(null, { editDayDescription, editDayTitle })(DayCard);

@@ -12,12 +12,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		root: {
 			width: '100%',
 		},
-		heading: {
-			fontSize: theme.typography.pxToRem(15),
-			fontWeight: theme.typography.fontWeightRegular,
-		},
+		heading: {},
 		subHeading: {
-			fontSize: theme.typography.pxToRem(13),
 			color: '#333',
 			marginLeft: 10,
 		},
@@ -36,11 +32,11 @@ const ExerciseItemTitle: React.FC<Props> = ({ exerciseItem, exercise }) => {
 	return (
 		<Grid container justify="space-between" className={classes.root}>
 			<Grid item>
-				<Typography className={classes.heading}>{exercise.title}</Typography>
+				<Typography variant="subtitle2" component="h6" color="primary" className={classes.heading}>
+					{exercise.title}
+				</Typography>
 			</Grid>
-			<Grid item>
-				<Chip label={sets.join(' | ')} color="primary" size="small" />
-			</Grid>
+			<Grid item>{sets.length ? <Chip label={sets.join(' | ')} color="primary" size="small" /> : 'no sets'}</Grid>
 		</Grid>
 	);
 };

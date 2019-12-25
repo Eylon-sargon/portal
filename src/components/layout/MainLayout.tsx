@@ -10,17 +10,17 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MenuIcon from '@material-ui/icons/MenuOutlined';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeftOutlined';
+import ChevronRightIcon from '@material-ui/icons/ChevronRightOutlined';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import FilterHdrIcon from '@material-ui/icons/FilterHdr';
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import TodayIcon from '@material-ui/icons/Today';
-import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
-import FlightIcon from '@material-ui/icons/Flight';
+import FilterHdrIcon from '@material-ui/icons/FilterHdrOutlined';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswerOutlined';
+import TodayIcon from '@material-ui/icons/TodayOutlined';
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenterOutlined';
+import FlightIcon from '@material-ui/icons/FlightOutlined';
 import IdeaIcon from '@material-ui/icons/LineWeightRounded';
 
 const drawerWidth = 240;
@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		drawerPaper: {
 			width: drawerWidth,
+			background: theme.palette.primary.main,
+			color: '#fff',
+			fontSize: 12,
 		},
 		drawerHeader: {
 			display: 'flex',
@@ -130,19 +133,19 @@ const MainLayout: React.FC<Props> = ({ children, history }) => {
 				}}
 			>
 				<div className={classes.drawerHeader}>
-					<IconButton onClick={handleDrawerClose}>{theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}</IconButton>
+					<IconButton onClick={handleDrawerClose}>{theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon color="secondary" fontSize="small" />}</IconButton>
 				</div>
 				<Divider />
 				<List>
 					<ListItem button onClick={() => redirect('training-program')}>
 						<ListItemIcon>
-							<TodayIcon />
+							<TodayIcon color="secondary" fontSize="small" />
 						</ListItemIcon>
 						<ListItemText primary="Training Program" />
 					</ListItem>
 					<ListItem button onClick={() => redirect('exercises')}>
 						<ListItemIcon>
-							<FitnessCenterIcon />
+							<FitnessCenterIcon color="secondary" fontSize="small" />
 						</ListItemIcon>
 						<ListItemText primary="Exercises" />
 					</ListItem>
@@ -151,7 +154,7 @@ const MainLayout: React.FC<Props> = ({ children, history }) => {
 				<List>
 					<ListItem button onClick={() => redirect('rpm-planner')}>
 						<ListItemIcon>
-							<FilterHdrIcon />
+							<FilterHdrIcon color="secondary" fontSize="small" />
 						</ListItemIcon>
 						<ListItemText primary="RPM Planner" />
 					</ListItem>
@@ -160,7 +163,7 @@ const MainLayout: React.FC<Props> = ({ children, history }) => {
 				<List>
 					<ListItem button onClick={() => redirect('nlp-module')}>
 						<ListItemIcon>
-							<QuestionAnswerIcon />
+							<QuestionAnswerIcon color="secondary" fontSize="small" />
 						</ListItemIcon>
 						<ListItemText primary="NLP Moudule" />
 					</ListItem>
@@ -169,16 +172,16 @@ const MainLayout: React.FC<Props> = ({ children, history }) => {
 				<List>
 					<ListItem button onClick={() => redirect('idea-module')}>
 						<ListItemIcon>
-							<IdeaIcon />
+							<IdeaIcon color="secondary" fontSize="small" />
 						</ListItemIcon>
 						<ListItemText primary="Ideas" />
 					</ListItem>
 				</List>
 				<Divider />
 				<List>
-					<ListItem button onClick={() => redirect('travel-module')}>
+					<ListItem button onClick={() => redirect('test')}>
 						<ListItemIcon>
-							<FlightIcon />
+							<FlightIcon color="secondary" fontSize="small" />
 						</ListItemIcon>
 						<ListItemText primary="Travels" />
 					</ListItem>
