@@ -34,24 +34,25 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
 	day: Day;
 	sortExerciseItems: typeof sortExerciseItems;
+	editMode: boolean;
 }
 
-const generateData = (day: Day, classes: any): DragDropListData[] =>
+const generateData = (day: Day, classes: any, editMode: boolean): DragDropListData[] =>
 	day.exerciseItems.map(exerciseItem => ({
 		id: exerciseItem.id,
 		primary: (
 			<Grid container alignItems="center">
 				<Grid item className={classes.title}>
-					<ExerciseItemTitle exercise={getExercise(exerciseItem.exercise)} exerciseItem={exerciseItem} />
+					<ExerciseItemTitle exercise={getExercise(exerciseItem.exercise)} day={day} exerciseItem={exerciseItem} editMode={editMode} />
 				</Grid>
 			</Grid>
 		),
 		secondary: <ExerciseItemDetails exerciseItem={exerciseItem} />,
 	}));
 
-const ExerciseItemExpansionPanel: React.FC<Props> = ({ day, sortExerciseItems }) => {
+const ExerciseItemExpansionPanel: React.FC<Props> = ({ day, sortExerciseItems, editMode }) => {
 	const classes = useStyles({});
-	const data = generateData(day, classes);
+	const data = generateData(day, classes, editMode);
 
 	const onDragChange = (items: DragDropListData[]) => {
 		const exerciseItemIds = items.map(item => item.id);

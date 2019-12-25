@@ -84,7 +84,7 @@ const DayCard: React.FC<Props> = ({ day, index, editDayTitle, editDayDescription
 			/>
 
 			<CardContent>
-				<ExerciseItemList day={day} />
+				<ExerciseItemList day={day} editMode={editMode} />
 			</CardContent>
 		</Card>
 	);
