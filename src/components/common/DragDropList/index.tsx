@@ -1,7 +1,7 @@
 import React from 'react';
 import DragDropListComponent from './DragDropList';
 
-interface Data {
+export interface DragDropListData {
 	id: string;
 	primary?: any;
 	secondary?: any;
@@ -9,7 +9,7 @@ interface Data {
 }
 
 interface Props {
-	data: Data[];
+	data: DragDropListData[];
 	onDragChange?: any;
 }
 

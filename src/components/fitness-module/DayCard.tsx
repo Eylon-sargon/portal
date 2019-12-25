@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -6,8 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
-import { red } from '@material-ui/core/colors';
-import ExerciseItemExpansionPanel from './ExerciseItemExpansionPanel';
+import ExerciseItemList from './ExerciseItemList';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import EditIcon from '@material-ui/icons/Edit';
 import { Day } from '../../types/Day';
@@ -85,9 +84,7 @@ const DayCard: React.FC<Props> = ({ day, index, editDayTitle, editDayDescription
 			/>
 
 			<CardContent>
-				{day.exerciseItems.map(exerciseItem => (
-					<ExerciseItemExpansionPanel key={exerciseItem.id} exerciseItem={exerciseItem} />
-				))}
+				<ExerciseItemList day={day} />
 			</CardContent>
 		</Card>
 	);
