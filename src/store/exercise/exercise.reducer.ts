@@ -2,7 +2,8 @@ import { ExerciseState, ADD_EXERCISE, EDIT_EXERCISE, DELETE_EXERCISE, ExerciseAc
 
 import { exerciseSeedData } from './exercise-seed-data';
 
-const initialState = exerciseSeedData;
+const saved = localStorage.getItem('app-state');
+const initialState = saved ? (JSON.parse(saved).exercise as ExerciseState) : exerciseSeedData;
 
 export function exerciseReducer(exercises = initialState, action: ExerciseActionTypes): ExerciseState {
 	switch (action.type) {

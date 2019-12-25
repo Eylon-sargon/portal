@@ -10,7 +10,8 @@ import {
 } from './day.types';
 import { dayStateSeedData } from './day.seed-data';
 
-const initialState = dayStateSeedData;
+const saved = localStorage.getItem('app-state');
+const initialState = saved ? (JSON.parse(saved).day as DayState) : dayStateSeedData;
 
 export function dayReducer(days = initialState, action: DayActionTypes): DayState {
 	switch (action.type) {
